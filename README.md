@@ -1,11 +1,11 @@
 <div align="center">
 
-# ✍️ Markora
+# Markora
 
 <!-- Language selector -->
-[![English](https://img.shields.io/badge/🇺🇸-English-blue?style=flat-square)](#-english)
 [![简体中文](https://img.shields.io/badge/🇨🇳-简体中文-red?style=flat-square)](#-简体中文)
 [![繁體中文](https://img.shields.io/badge/🇭🇰-繁體中文-orange?style=flat-square)](#-繁體中文)
+[![English](https://img.shields.io/badge/🇺🇸-English-blue?style=flat-square)](#-english)
 
 <!-- Badges -->
 [![Version](https://img.shields.io/badge/version-1.0.0-6B96E8?style=for-the-badge&logo=tauri&logoColor=white)](https://github.com/xiaoxiong-88/markora/releases/tag/v1.0)
@@ -23,131 +23,6 @@
 ---
 
 <!-- ============================================================ -->
-<!--                        E N G L I S H                          -->
-<!-- ============================================================ -->
-
-## 🇺🇸 English
-
-### ✨ Overview
-
-**Markora** is a free, local-first, privacy-friendly Markdown desktop editor. Fast startup, refined UI, an experience as close to **Typora** as possible — but open source and fully offline.
-
-> Your documents never leave your machine. No telemetry, no uploads, no login, no cloud.
-
-### 🎯 Features
-
-| Category | Highlights |
-|----------|------------|
-| **Editor** | Dual architecture: WYSIWYG (Milkdown / ProseMirror) + Source (CodeMirror 6) |
-| **Modes** | WYSIWYG · Source · Split Preview · Reading |
-| **Preview** | Live, debounced, bidirectional scroll sync via source anchors |
-| **Markdown** | GFM tables, task lists, footnotes, front matter, KaTeX math, Mermaid diagrams |
-| **Code** | Shiki syntax highlighting, line numbers, copy button, language detection |
-| **Images** | Paste / drag-to-assets, relative paths, lightbox, broken-image placeholder |
-| **Workspace** | File tree, outline, in-document find/replace, workspace-wide search |
-| **Tabs** | Multi-tab, pin, drag-reorder, reopen closed, dirty indicator |
-| **Save** | Auto-save, atomic writes, external-change detection, conflict resolution |
-| **Theme** | Light / Dark / Sepia / High Contrast, follows system, custom fonts |
-| **Export** | Standalone HTML, print/PDF, Markdown copy |
-| **Extras** | Command palette, quick open, focus mode, typewriter mode, session restore |
-
-### 🏗️ Tech Stack
-
-```
-┌──────────────┐     ┌─────────────────────────────────────┐
-│   Tauri 2    │────▶│  Rust backend (fs, search, watcher) │
-│  (Desktop)   │     └─────────────────────────────────────┘
-└──────────────┘
-       │
-       ▼
-┌──────────────────────────────────────────────────────────────┐
-│                    Frontend (WebView)                        │
-│  React 18 + TypeScript (strict) + Vite + Zustand + Tailwind  │
-│  Milkdown (WYSIWYG) · CodeMirror 6 (Source) · unified/remark │
-└──────────────────────────────────────────────────────────────┘
-```
-
-### 🚀 Quick Start
-
-#### Prerequisites
-- [Node.js](https://nodejs.org/) + [pnpm](https://pnpm.io/)
-- [Rust](https://www.rust-lang.org/tools/install) (stable)
-- [Tauri system deps](https://v2.tauri.app/start/prerequisites/)
-
-#### Development
-```bash
-pnpm install        # install dependencies
-pnpm tauri dev      # launch dev app
-```
-
-#### Build
-```bash
-pnpm tauri build    # produce installer (.dmg / .msi / .AppImage)
-```
-
-### 🧪 Testing
-
-```bash
-pnpm typecheck      # TypeScript check
-pnpm test           # Vitest frontend tests
-cd src-tauri && cargo test  # Rust backend tests (29 tests)
-```
-
-### 📁 Project Structure
-
-```
-markora/
-├── src/                          # React frontend
-│   ├── features/
-│   │   ├── editor/               # WYSIWYG + Source + Preview
-│   │   ├── workspace/            # File tree + conflict dialog
-│   │   ├── tabs/                 # Tab bar
-│   │   ├── outline/              # Document outline
-│   │   ├── search/               # Workspace search
-│   │   ├── command-palette/      # Command palette + quick open
-│   │   ├── settings/             # Settings center
-│   │   ├── statusbar/            # Status bar
-│   │   ├── export/               # HTML export + print
-│   │   └── welcome/              # Welcome screen
-│   ├── stores/                   # Zustand stores
-│   ├── services/                 # Tauri IPC + persistence
-│   ├── hooks/                    # React hooks
-│   ├── lib/                      # Utilities
-│   ├── components/               # Shared components
-│   ├── i18n/                     # English + 中文
-│   ├── types/                    # TypeScript types
-│   └── styles/                   # Global CSS + Tailwind
-├── src-tauri/                    # Tauri + Rust backend
-│   ├── src/
-│   │   ├── commands/             # Tauri command surface
-│   │   ├── filesystem/           # Read/write/list/assets
-│   │   ├── search/               # Workspace search
-│   │   ├── watcher/              # FS change watcher
-│   │   └── errors/               # Structured errors
-│   └── capabilities/             # Tauri capabilities
-├── tests/                        # Test fixtures
-├── docs/                         # Architecture, Security, Dev docs
-├── package.json
-├── pnpm-lock.yaml
-└── README.md
-```
-
-### 🔒 Privacy
-
-| What we **don't** do | |
-|---|---|
-| ❌ No telemetry | ❌ No analytics |
-| ❌ No uploads | ❌ No cloud sync |
-| ❌ No login | ❌ No API keys |
-| ❌ No ads | ❌ No tracking |
-
-### 📄 License
-
-[MIT](LICENSE) © 2026 xiaoxiong-88
-
----
-
-<!-- ============================================================ -->
 <!--                     简 体 中 文                               -->
 <!-- ============================================================ -->
 
@@ -155,7 +30,7 @@ markora/
 
 ### ✨ 简介
 
-**Markora** 是一款免费、本地优先、隐私友好的 Markdown 桌面编辑器。启动快速、界面精致，体验尽可能接近 **Typora** —— 但完全开源、完全离线。
+**Markora** 是一款免费、本地优先、隐私友好的 Markdown 桌面编辑器。启动快速、界面精致，完全开源、完全离线。
 
 > 你的文档永远不会离开本机。无遥测、无上传、无登录、无云服务。
 
@@ -280,7 +155,7 @@ markora/
 
 ### ✨ 簡介
 
-**Markora** 是一款免費、本地優先、隱私友好的 Markdown 桌面編輯器。啟動快速、介面精緻，體驗盡可能接近 **Typora** —— 但完全開本、完全離線。
+**Markora** 是一款免費、本地優先、隱私友好的 Markdown 桌面編輯器。啟動快速、介面精緻，完全開源、完全離線。
 
 > 你的文件永遠不會離開本機。無遙測、無上傳、無登入、無雲端服務。
 
@@ -392,6 +267,131 @@ markora/
 | ❌ 無廣告 | ❌ 無追蹤 |
 
 ### 📄 許可證
+
+[MIT](LICENSE) © 2026 xiaoxiong-88
+
+---
+
+<!-- ============================================================ -->
+<!--                        E N G L I S H                          -->
+<!-- ============================================================ -->
+
+## 🇺🇸 English
+
+### ✨ Overview
+
+**Markora** is a free, local-first, privacy-friendly Markdown desktop editor. Fast startup, refined UI, open source and fully offline.
+
+> Your documents never leave your machine. No telemetry, no uploads, no login, no cloud.
+
+### 🎯 Features
+
+| Category | Highlights |
+|----------|------------|
+| **Editor** | Dual architecture: WYSIWYG (Milkdown / ProseMirror) + Source (CodeMirror 6) |
+| **Modes** | WYSIWYG · Source · Split Preview · Reading |
+| **Preview** | Live, debounced, bidirectional scroll sync via source anchors |
+| **Markdown** | GFM tables, task lists, footnotes, front matter, KaTeX math, Mermaid diagrams |
+| **Code** | Shiki syntax highlighting, line numbers, copy button, language detection |
+| **Images** | Paste / drag-to-assets, relative paths, lightbox, broken-image placeholder |
+| **Workspace** | File tree, outline, in-document find/replace, workspace-wide search |
+| **Tabs** | Multi-tab, pin, drag-reorder, reopen closed, dirty indicator |
+| **Save** | Auto-save, atomic writes, external-change detection, conflict resolution |
+| **Theme** | Light / Dark / Sepia / High Contrast, follows system, custom fonts |
+| **Export** | Standalone HTML, print/PDF, Markdown copy |
+| **Extras** | Command palette, quick open, focus mode, typewriter mode, session restore |
+
+### 🏗️ Tech Stack
+
+```
+┌──────────────┐     ┌─────────────────────────────────────┐
+│   Tauri 2    │────▶│  Rust backend (fs, search, watcher) │
+│  (Desktop)   │     └─────────────────────────────────────┘
+└──────────────┘
+       │
+       ▼
+┌──────────────────────────────────────────────────────────────┐
+│                    Frontend (WebView)                        │
+│  React 18 + TypeScript (strict) + Vite + Zustand + Tailwind  │
+│  Milkdown (WYSIWYG) · CodeMirror 6 (Source) · unified/remark │
+└──────────────────────────────────────────────────────────────┘
+```
+
+### 🚀 Quick Start
+
+#### Prerequisites
+- [Node.js](https://nodejs.org/) + [pnpm](https://pnpm.io/)
+- [Rust](https://www.rust-lang.org/tools/install) (stable)
+- [Tauri system deps](https://v2.tauri.app/start/prerequisites/)
+
+#### Development
+```bash
+pnpm install        # install dependencies
+pnpm tauri dev      # launch dev app
+```
+
+#### Build
+```bash
+pnpm tauri build    # produce installer (.dmg / .msi / .AppImage)
+```
+
+### 🧪 Testing
+
+```bash
+pnpm typecheck      # TypeScript check
+pnpm test           # Vitest frontend tests
+cd src-tauri && cargo test  # Rust backend tests (29 tests)
+```
+
+### 📁 Project Structure
+
+```
+markora/
+├── src/                          # React frontend
+│   ├── features/
+│   │   ├── editor/               # WYSIWYG + Source + Preview
+│   │   ├── workspace/            # File tree + conflict dialog
+│   │   ├── tabs/                 # Tab bar
+│   │   ├── outline/              # Document outline
+│   │   ├── search/               # Workspace search
+│   │   ├── command-palette/      # Command palette + quick open
+│   │   ├── settings/             # Settings center
+│   │   ├── statusbar/            # Status bar
+│   │   ├── export/               # HTML export + print
+│   │   └── welcome/              # Welcome screen
+│   ├── stores/                   # Zustand stores
+│   ├── services/                 # Tauri IPC + persistence
+│   ├── hooks/                    # React hooks
+│   ├── lib/                      # Utilities
+│   ├── components/               # Shared components
+│   ├── i18n/                     # English + 中文
+│   ├── types/                    # TypeScript types
+│   └── styles/                   # Global CSS + Tailwind
+├── src-tauri/                    # Tauri + Rust backend
+│   ├── src/
+│   │   ├── commands/             # Tauri command surface
+│   │   ├── filesystem/           # Read/write/list/assets
+│   │   ├── search/               # Workspace search
+│   │   ├── watcher/              # FS change watcher
+│   │   └── errors/               # Structured errors
+│   └── capabilities/             # Tauri capabilities
+├── tests/                        # Test fixtures
+├── docs/                         # Architecture, Security, Dev docs
+├── package.json
+├── pnpm-lock.yaml
+└── README.md
+```
+
+### 🔒 Privacy
+
+| What we **don't** do | |
+|---|---|
+| ❌ No telemetry | ❌ No analytics |
+| ❌ No uploads | ❌ No cloud sync |
+| ❌ No login | ❌ No API keys |
+| ❌ No ads | ❌ No tracking |
+
+### 📄 License
 
 [MIT](LICENSE) © 2026 xiaoxiong-88
 
