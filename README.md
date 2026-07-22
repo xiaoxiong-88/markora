@@ -403,7 +403,7 @@ markora/
 
 <div align="center">
 
-Made with ❤️ by [xiaoxiong-88](https://github.com/xiaoxiong-88)
+Made with by [xiaoxiong-88](https://github.com/xiaoxiong-88)
 
 ⭐ Star this repo if you find it helpful!
 
