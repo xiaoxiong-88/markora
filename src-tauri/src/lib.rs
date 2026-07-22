@@ -8,11 +8,19 @@ mod search;
 mod watcher;
 
 use search::SearchState;
+use std::sync::Mutex;
+use tauri::{Emitter, Manager, RunEvent};
 use watcher::WatcherState;
+
+/// File paths delivered by the OS "Open With" mechanism (macOS `Opened` run
+/// event) that arrived before the frontend attached its listener — notably
+/// cold launches. Drained by the frontend via `take_pending_opens`.
+#[derive(Default)]
+pub(crate) struct PendingOpens(pub(crate) Mutex<Vec<String>>);
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
-    tauri::Builder::default()
+    let app = tauri::Builder::default()
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_fs::init())
         .plugin(tauri_plugin_opener::init())
@@ -22,6 +30,7 @@ pub fn run() {
         .plugin(tauri_plugin_process::init())
         .manage(SearchState::default())
         .manage(WatcherState::default())
+        .manage(PendingOpens::default())
         .invoke_handler(tauri::generate_handler![
             commands::read_file,
             commands::atomic_write,
@@ -41,7 +50,33 @@ pub fn run() {
             commands::cancel_search,
             commands::watch_path,
             commands::unwatch_path,
+            commands::take_pending_opens,
         ])
-        .run(tauri::generate_context!())
-        .expect("error while running Markora");
+        .build(tauri::generate_context!())
+        .expect("error while building Markora");
+
+    app.run(|handle, event| {
+        // macOS "Open With" / dropping a file onto the dock icon.
+        if let RunEvent::Opened { urls } = event {
+            let paths: Vec<String> = urls
+                .iter()
+                .filter_map(|url| url.to_file_path().ok())
+                .map(|path| path.to_string_lossy().into_owned())
+                .collect();
+            if paths.is_empty() {
+                return;
+            }
+            handle
+                .state::<PendingOpens>()
+                .0
+                .lock()
+                .unwrap()
+                .extend(paths.iter().cloned());
+            let _ = handle.emit("markora://open-files", paths);
+            if let Some(window) = handle.get_webview_window("main") {
+                let _ = window.unminimize();
+                let _ = window.set_focus();
+            }
+        }
+    });
 }

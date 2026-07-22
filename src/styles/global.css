@@ -265,6 +265,15 @@ textarea {
 }
 .markdown-body ul,
 .markdown-body ol { padding-left: 1.6em; margin: 0.5em 0; }
+.markdown-body ul { list-style: disc; }
+.markdown-body ol { list-style: decimal; }
+.markdown-body ul ul,
+.markdown-body ol ul { list-style: circle; }
+.markdown-body ul ul ul,
+.markdown-body ol ul ul,
+.markdown-body ul ol ul,
+.markdown-body ol ol ul { list-style: square; }
+.markdown-body li::marker { color: var(--fg-muted); }
 .markdown-body li.task-list-item { list-style: none; margin-left: -1.4em; }
 .markdown-body li.task-list-item input[type="checkbox"] { margin-right: 6px; }
 .markdown-body table {

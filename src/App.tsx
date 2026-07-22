@@ -19,10 +19,13 @@ import { useWorkspaceStore } from "@/stores/workspace";
 import { useFsWatcher } from "@/hooks/useFsWatcher";
 import { useGlobalShortcuts } from "@/hooks/useGlobalShortcuts";
 import { useAutosave } from "@/hooks/useAutosave";
+import { useFileDrop } from "@/hooks/useFileDrop";
 import { buildCommands } from "@/features/command-palette/commands";
 import { isMac } from "@/lib/platform";
 import { onDragRegionMouseDown } from "@/lib/drag";
+import { t } from "@/i18n";
 import { restoreSession, watchOpenDocuments, persistRecovery } from "@/services/session";
+import { consumeOpenWithFiles } from "@/services/openWith";
 
 export default function App() {
   const activeDoc = useDocumentsStore((s) => (s.activeId ? s.documents[s.activeId] : null));
@@ -35,6 +38,7 @@ export default function App() {
   const zoom = useSettingsStore((s) => s.zoom);
 
   const commands = useMemo(() => buildCommands(), []);
+  const strings = t();
 
   // Global keyboard shortcuts.
   useGlobalShortcuts(commands);
@@ -42,6 +46,8 @@ export default function App() {
   useFsWatcher();
   // Autosave.
   useAutosave();
+  // Open Markdown files dropped onto the window.
+  const isFileDragOver = useFileDrop();
 
   // Apply appearance (theme + typography) and react to system theme + settings.
   useEffect(() => {
@@ -61,6 +67,7 @@ export default function App() {
       await useWorkspaceStore.getState().loadRecents();
       await restoreSession();
       await watchOpenDocuments();
+      await consumeOpenWithFiles();
     })();
 
     const onBeforeUnload = () => persistRecovery();
@@ -73,7 +80,7 @@ export default function App() {
 
   return (
     <ErrorBoundary>
-      <div className="flex h-full w-full flex-col bg-[var(--bg-primary)] text-[var(--fg-primary)]">
+      <div className="relative flex h-full w-full flex-col bg-[var(--bg-primary)] text-[var(--fg-primary)]">
         {/* Title bar: drag region + traffic-light padding on macOS overlay. */}
         <div
           className="flex shrink-0 items-stretch border-b border-[var(--border)]"
@@ -144,6 +151,13 @@ export default function App() {
         <QuickOpen />
         <SettingsPanel />
         <ConflictDialogHost />
+
+        {/* File drop hint */}
+        {isFileDragOver && (
+          <div className="pointer-events-none absolute inset-0 z-50 flex items-center justify-center border-2 border-dashed border-[var(--accent)] bg-[var(--bg-primary)]/80">
+            <span className="text-sm font-medium text-[var(--accent)]">{strings.dropHint}</span>
+          </div>
+        )}
       </div>
     </ErrorBoundary>
   );

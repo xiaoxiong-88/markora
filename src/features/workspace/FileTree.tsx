@@ -8,6 +8,7 @@ import {
   FilePlus2,
   FolderPlus,
   RefreshCw,
+  PanelLeftClose,
 } from "lucide-react";
 import { useWorkspaceStore } from "@/stores/workspace";
 import { useDocumentsStore } from "@/stores/documents";
@@ -38,8 +39,13 @@ export function FileTree() {
 
   if (!root) {
     return (
-      <div className="px-3 py-6 text-center text-xs text-[var(--fg-muted)]">
-        {strings.welcome.openFolder}
+      <div className="flex h-full flex-col">
+        <div className="flex items-center justify-end px-2 py-1.5">
+          <CollapseSidebarButton />
+        </div>
+        <div className="px-3 py-6 text-center text-xs text-[var(--fg-muted)]">
+          {strings.welcome.openFolder}
+        </div>
       </div>
     );
   }
@@ -74,6 +80,7 @@ export function FileTree() {
           >
             <RefreshCw size={14} />
           </button>
+          <CollapseSidebarButton />
         </div>
       </div>
       <div className="flex-1 overflow-y-auto px-1 pb-4">
@@ -81,6 +88,22 @@ export function FileTree() {
       </div>
       {promptElement}
     </div>
+  );
+}
+
+/** Collapses the sidebar; reopen via the status-bar button or ⌘⇧B. */
+function CollapseSidebarButton() {
+  const strings = t();
+  return (
+    <button
+      type="button"
+      className="icon-btn !h-6 !w-6"
+      aria-label={strings.command.toggleSidebar}
+      title={strings.command.toggleSidebar}
+      onClick={() => useUiStore.getState().toggleSidebar()}
+    >
+      <PanelLeftClose size={14} />
+    </button>
   );
 }
 

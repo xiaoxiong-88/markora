@@ -129,3 +129,9 @@ pub fn path_exists(path: String) -> bool {
 pub fn file_mtime(path: String) -> Option<u64> {
     crate::filesystem::assets::file_mtime(path)
 }
+
+/// Drains OS "Open With" file paths buffered before the frontend was ready.
+#[tauri::command]
+pub fn take_pending_opens(state: State<'_, crate::PendingOpens>) -> Vec<String> {
+    std::mem::take(&mut *state.0.lock().unwrap())
+}

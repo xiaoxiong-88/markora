@@ -19,6 +19,7 @@ import {
   type SlashState,
   type ToolbarState,
 } from "./milkdown/plugins";
+import { createShikiHighlightPlugin } from "./milkdown/shikiHighlight";
 import { SLASH_ITEMS } from "./milkdown/items";
 
 export interface WysiwygEditorProps {
@@ -172,7 +173,8 @@ export function WysiwygEditor({
       .use(math)
       .use(diagram)
       .use(slashPlugin)
-      .use(toolbarPlugin);
+      .use(toolbarPlugin)
+      .use(createShikiHighlightPlugin());
 
     editor
       .create()

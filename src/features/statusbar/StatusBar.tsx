@@ -1,8 +1,11 @@
 import { useMemo } from "react";
+import { PanelLeftClose, PanelLeftOpen } from "lucide-react";
 import { useDocumentsStore } from "@/stores/documents";
 import { useSettingsStore } from "@/stores/settings";
+import { useUiStore } from "@/stores/ui";
 import { computeStats } from "@/lib/wordcount";
 import { onDragRegionMouseDown } from "@/lib/drag";
+import { MOD_KEY_LABEL } from "@/lib/platform";
 import { t } from "@/i18n";
 
 /** Bottom status bar: caret position, stats, encoding, save state (SPEC). */
@@ -17,6 +20,8 @@ export function StatusBar() {
   const stats = useMemo(() => (doc ? computeStats(doc.markdown) : null), [doc]);
 
   const saveState = activeId ? saveStates[activeId] : undefined;
+  const sidebarVisible = useUiStore((s) => s.sidebarVisible);
+  const toggleSidebar = useUiStore((s) => s.toggleSidebar);
   const saveLabel =
     saveState === "saving"
       ? strings.status.saving
@@ -34,6 +39,18 @@ export function StatusBar() {
       role="status"
       onMouseDown={onDragRegionMouseDown}
     >
+      <button
+        type="button"
+        className="icon-btn !h-5 !w-5 shrink-0"
+        aria-label={strings.command.toggleSidebar}
+        title={`${strings.command.toggleSidebar} (${MOD_KEY_LABEL}⇧B)`}
+        aria-pressed={sidebarVisible}
+        onClick={toggleSidebar}
+      >
+        {sidebarVisible ? <PanelLeftClose size={13} /> : <PanelLeftOpen size={13} />}
+      </button>
+
+      <Separator />
       <span className={`shrink-0 ${saveState === "failed" ? "text-red-500" : ""}`}>{saveLabel}</span>
 
       {doc && stats && (

@@ -92,4 +92,5 @@ export const backend = {
   cancelSearch: () => call<void>("cancel_search"),
   watchPath: (path: string) => call<void>("watch_path", { path }),
   unwatchPath: (path: string) => call<void>("unwatch_path", { path }),
+  takePendingOpens: () => call<string[]>("take_pending_opens"),
 };

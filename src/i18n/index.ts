@@ -11,6 +11,7 @@ const en = {
   // locale tables may freely translate them. Function fields keep their
   // signatures because their parameters are explicitly typed.
   appName: "Markora",
+  dropHint: "Drop Markdown files to open",
   welcome: {
     title: "Markora",
     subtitle: "A local-first Markdown editor",
@@ -219,6 +220,7 @@ export type Strings = typeof en;
 
 const zhCN: Strings = {
   appName: "Markora",
+  dropHint: "松开以打开 Markdown 文件",
   welcome: {
     title: "Markora",
     subtitle: "本地优先的 Markdown 编辑器",
