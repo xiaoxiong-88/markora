@@ -70,9 +70,15 @@
 ### 🚀 快速开始
 
 #### 环境要求
+
+**全平台通用：**
 - [Node.js](https://nodejs.org/) + [pnpm](https://pnpm.io/)
 - [Rust](https://www.rust-lang.org/tools/install)（stable）
 - [Tauri 系统依赖](https://v2.tauri.app/start/prerequisites/)
+
+**Windows 额外要求：**
+- [Microsoft C++ Build Tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/)（包含"使用 C++ 的桌面开发"工作负载）
+- [WebView2 Runtime](https://developer.microsoft.com/microsoft-edge/webview2/)（Windows 11 已内置，Windows 10 需手动安装）
 
 #### 开发
 ```bash
@@ -84,6 +90,15 @@ pnpm tauri dev      # 启动开发版
 ```bash
 pnpm tauri build    # 生成安装包（.dmg / .msi / .AppImage）
 ```
+
+#### Windows 构建
+
+确保已安装 Rust MSVC 目标：
+```bash
+rustup target add x86_64-pc-windows-msvc
+```
+
+然后运行打包命令，产物位于 `src-tauri/target/release/bundle/msi/`。
 
 ### 🧪 测试
 
@@ -195,9 +210,15 @@ markora/
 ### 🚀 快速開始
 
 #### 環境需求
+
+**全平台通用：**
 - [Node.js](https://nodejs.org/) + [pnpm](https://pnpm.io/)
 - [Rust](https://www.rust-lang.org/tools/install)（stable）
 - [Tauri 系統依賴](https://v2.tauri.app/start/prerequisites/)
+
+**Windows 額外需求：**
+- [Microsoft C++ Build Tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/)（包含「使用 C++ 的桌面開發」工作負載）
+- [WebView2 Runtime](https://developer.microsoft.com/microsoft-edge/webview2/)（Windows 11 已內建，Windows 10 需手動安裝）
 
 #### 開發
 ```bash
@@ -209,6 +230,15 @@ pnpm tauri dev      # 啟動開發版
 ```bash
 pnpm tauri build    # 產生安裝檔（.dmg / .msi / .AppImage）
 ```
+
+#### Windows 構建
+
+確保已安裝 Rust MSVC 目標：
+```bash
+rustup target add x86_64-pc-windows-msvc
+```
+
+然後執行打包命令，產物位於 `src-tauri/target/release/bundle/msi/`。
 
 ### 🧪 測試
 
@@ -320,9 +350,15 @@ markora/
 ### 🚀 Quick Start
 
 #### Prerequisites
+
+**All platforms:**
 - [Node.js](https://nodejs.org/) + [pnpm](https://pnpm.io/)
 - [Rust](https://www.rust-lang.org/tools/install) (stable)
 - [Tauri system deps](https://v2.tauri.app/start/prerequisites/)
+
+**Windows additionally requires:**
+- [Microsoft C++ Build Tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/) ("Desktop development with C++" workload)
+- [WebView2 Runtime](https://developer.microsoft.com/microsoft-edge/webview2/) (built into Windows 11; Windows 10 needs a manual install)
 
 #### Development
 ```bash
@@ -334,6 +370,15 @@ pnpm tauri dev      # launch dev app
 ```bash
 pnpm tauri build    # produce installer (.dmg / .msi / .AppImage)
 ```
+
+#### Windows build
+
+Ensure the Rust MSVC target is installed:
+```bash
+rustup target add x86_64-pc-windows-msvc
+```
+
+Then run the build command. The `.msi` installer lands in `src-tauri/target/release/bundle/msi/`.
 
 ### 🧪 Testing
 

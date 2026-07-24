@@ -21,7 +21,8 @@
         "hiddenTitle": true,
         "decorations": true,
         "resizable": true,
-        "fullscreen": false
+        "fullscreen": false,
+        "additionalBrowserArgs": ""
       }
     ],
     "security": {
